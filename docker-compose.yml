@@ -1,0 +1,33 @@
+version: "1"
+
+volumes:
+  postgres_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/django/dockerfile
+    image: newsletter_django
+    container_name: django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+      - /app/.env # do not link this directory
+      - /app/react_spa  # do not link this directory
+    env_file:
+      - ./.envs/.django
+      - ./.envs/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    image: "postgres:12.3"
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data:Z
+    env_file:
+      - ./.envs/.postgres
+
