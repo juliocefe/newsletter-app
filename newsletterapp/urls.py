@@ -15,12 +15,21 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# rest framework
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # rest framework
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api-token-auth/", ObtainAuthToken.as_view(), name="api-token-auth"),
 ]
 
 if settings.DEBUG:
