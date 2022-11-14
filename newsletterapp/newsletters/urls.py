@@ -6,4 +6,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r"newsletters", views.NewsLetterApi,  basename="newsletters")
 
-urlpatterns = router.urls
+apiurls = [
+    path("api/", include((router.urls, "api"))),
+]
+urlpatterns = apiurls
