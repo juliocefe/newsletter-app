@@ -59,7 +59,17 @@ class TopicSusbscription(MyBaseModel):
 
 
 class NewsLetter(MyBaseModel):
-    """TODO"""
+    """Newsletter model.
+    
+    Represent a newsletter.
+    fields:
+        title: The title of the newsletter
+        file: A file that will be atached to the newsletter email,
+            it can be a pdf or an image.
+        topic: The the newsletter topic.
+        created_by: The user that created the newsletter.
+    """
+    title = models.CharField(max_length=50)
     file = models.FileField(
         upload_to="newsletterapp/newsletters/media/newsletters", 
         validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])]
@@ -67,6 +77,10 @@ class NewsLetter(MyBaseModel):
     topic = models.ForeignKey(
         to=Topic,
         on_delete=models.CASCADE,
+    )
+    created_by = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT
     )
 
 
