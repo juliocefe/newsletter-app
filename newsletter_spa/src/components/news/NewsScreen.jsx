@@ -4,23 +4,22 @@ import Box from "@mui/material/Box";
 import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
 import BasicTable from "./newsTable/news";
 
-
-function DashBoard(){
+function DashBoard() {
   return (
     <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      mt: 2,
-      height: 100,
-      border: "1px solid lightgray",
-    }}
-  >
-    Dashboard here
-  </Box>
-  )
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        mt: 2,
+        height: 100,
+        border: "1px solid lightgray",
+      }}
+    >
+      Dashboard here
+    </Box>
+  );
 }
 
 function NewsScreen() {
@@ -58,7 +57,7 @@ function NewsScreen() {
       >
         <BasicTable />
       </Box>
-      <AddNewsLetter open={open} handleClose={() => setOpen(false)} />
+      {open && <AddNewsLetter open={open} handleClose={() => setOpen(false)} />}
     </Box>
   );
 }
