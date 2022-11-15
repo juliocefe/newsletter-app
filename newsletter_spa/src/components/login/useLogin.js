@@ -16,7 +16,6 @@ export const useLogin = () => {
         password: password.value,
       })
       .then((response) => {
-        console.log(response.data)
         activateAuth(response.data);
       })
       .catch((error) => {
