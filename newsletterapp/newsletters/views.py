@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, views
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,6 +6,8 @@ from rest_framework import status
 from newsletterapp.newsletters.serializers import NewsLetterCreateSerializer
 # services
 from newsletterapp.newsletters.services import newsletter_create
+# selectors
+from newsletterapp.newsletters.selectors import getTopics, getRecipients
 
 
 class NewsLetterApi(viewsets.ViewSet):
@@ -23,3 +25,25 @@ class NewsLetterApi(viewsets.ViewSet):
         raise NotImplementedError()
 
 
+class TopicsListApi(views.APIView):
+
+    class OutputSerializer(serializers.Serializer):
+        id = serializers.IntegerField()
+        name = serializers.CharField()
+    
+    def get(self, request):
+        queryset = getTopics()
+        data = self.OutputSerializer(queryset, many=True).data
+        return Response({"topics": data},  status=status.HTTP_200_OK)
+
+
+class RecipientsListApi(views.APIView):
+
+    class OutputSerializer(serializers.Serializer):
+        id = serializers.IntegerField()
+        email = serializers.CharField()
+    
+    def get(self, request):
+        queryset = getRecipients()
+        data = self.OutputSerializer(queryset, many=True).data
+        return Response({"recipients": data},  status=status.HTTP_200_OK)

@@ -7,6 +7,9 @@ router = DefaultRouter()
 router.register(r"newsletters", views.NewsLetterApi,  basename="newsletters")
 
 apiurls = [
-    path("api/", include((router.urls, "api"))),
+    path("api/", include(router.urls)),
+    path("api/topics/", views.TopicsListApi.as_view(), name="topics"),
+    path("api/recipients/", views.RecipientsListApi.as_view(), name="recipients"),
 ]
+
 urlpatterns = apiurls
