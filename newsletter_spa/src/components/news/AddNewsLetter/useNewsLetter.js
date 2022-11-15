@@ -7,10 +7,18 @@ export const useNewsLetter = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [topics, setTopics] = useState([]);
   const [recipients, setRecipients] = useState([]);
-  const file = useState();
+  const [file, setFile] = useState();
   const title = useFormInput("");
-  const selectedTopic = useFormInput(null);
-  const selectedRecipients = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedRecipients, setSelectedRecipients] = useState([])
+
+  const fileHandleChange = (e) => {
+    setFile(e.target.files[0])
+  }
+
+  const selectRecipients = (recipients) => {
+    setSelectedRecipients(recipients);
+  };
 
   const loadTopicsAndRecipients = controller => {
     setIsLoading(true);
@@ -29,7 +37,6 @@ export const useNewsLetter = () => {
   };
 
   useEffect(() => {
-    console.log("executing");
     const controller = new AbortController();
     loadTopicsAndRecipients(controller)
     return () => {
@@ -37,14 +44,14 @@ export const useNewsLetter = () => {
     }
   }, []);
 
-  const submit = () => {
+  const submit = async () => {
     setSubmiting(true);
-    saveNewsLetter({
-      file: file,
-      title: title,
-      topic: selectedTopic,
-      recipients: selectedRecipients,
-    })
+    const formData = new FormData();
+    formData.append("file", file)
+    formData.append("title", title.value)
+    formData.append("topic", selectedTopic.id)
+    formData.append("items", JSON.stringify(recipients))
+    return saveNewsLetter(formData)
       .then((response) => {
         console.log(response.data);
       })
@@ -56,7 +63,14 @@ export const useNewsLetter = () => {
 
   return {
     submit,
+    fileHandleChange,
+    selectRecipients,
+    setSelectedTopic,
+    file,
+    title,
     topics,
+    selectedTopic,
+    selectedRecipients,
     recipients,
     isLoading,
     submiting,

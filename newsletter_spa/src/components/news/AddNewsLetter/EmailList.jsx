@@ -8,12 +8,19 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default function RecipientsSelection({data}) {
+export default function RecipientsSelection({
+  options,
+  selectedOptions,
+  selectOptions
+}) {
+
   return (
     <Autocomplete
       multiple
       id="recipients-list"
-      options={data}
+      options={options}
+      value={selectedOptions}
+      onChange={(e, values) => selectOptions(values)}
       getOptionLabel={option => option.email}
       disableCloseOnSelect
       renderOption={(props, option, { selected }) => (

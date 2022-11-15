@@ -12,8 +12,8 @@ import Box from "@mui/material/Box";
 //
 import TextField from "@mui/material/TextField";
 import LimitTags from "./EmailList";
-import ComboBox from "./Topics";
-import {useNewsLetter} from "./useNewsLetter"
+import TopicsSelect from "./Topics";
+import { useNewsLetter } from "./useNewsLetter";
 
 const BootstrapDialog = styled(Dialog)(({ theme, sx }) => ({
   "& .MuiDialogContent-root": {
@@ -22,7 +22,7 @@ const BootstrapDialog = styled(Dialog)(({ theme, sx }) => ({
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
   },
-  "sx": sx
+  sx: sx,
 }));
 
 function BootstrapDialogTitle(props) {
@@ -57,12 +57,23 @@ BootstrapDialogTitle.propTypes = {
 export default function AddNewsLetter({ open, handleClose }) {
   const {
     submit,
+    fileHandleChange,
+    selectRecipients,
+    file,
+    title,
+    selectedTopic,
+    setSelectedTopic,
+    selectedRecipients,
     topics,
     recipients,
     isLoading,
-    submiting
-  } = useNewsLetter()
-  console.log(topics)
+    submiting,
+  } = useNewsLetter();
+
+  const handleSubmit = () => {
+    submit().then(handleClose());
+  };
+
   return (
     <div>
       <BootstrapDialog
@@ -83,6 +94,7 @@ export default function AddNewsLetter({ open, handleClose }) {
             variant={"standard"}
             fullWidth={true}
             type={"file"}
+            onChange={fileHandleChange}
           />
           <Box sx={{ mt: 2 }}>
             <TextField
@@ -90,17 +102,26 @@ export default function AddNewsLetter({ open, handleClose }) {
               label={"Title"}
               variant={"standard"}
               fullWidth={true}
+              {...title}
             />
           </Box>
           <Box sx={{ mt: 2 }}>
-            <ComboBox data={topics}/>
+            <TopicsSelect
+              data={topics}
+              selectedValue={selectedTopic}
+              onChange={setSelectedTopic}
+            />
           </Box>
           <Box sx={{ mt: 2 }}>
-            <LimitTags data={recipients}/>
+            <LimitTags
+              options={recipients}
+              selectedOptions={selectedRecipients}
+              selectOptions={selectRecipients}
+            />
           </Box>
         </DialogContent>
-        <DialogActions sx={{mt: 2}}>
-          <Button autoFocus onClick={handleClose} variant="contained">
+        <DialogActions sx={{ mt: 2 }}>
+          <Button autoFocus onClick={handleSubmit} variant="contained">
             Submit
           </Button>
         </DialogActions>
