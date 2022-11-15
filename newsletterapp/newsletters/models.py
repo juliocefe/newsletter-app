@@ -31,9 +31,12 @@ class Recipient(MyBaseModel):
         subscribed: If value is False, means the user 
         chose to unsubscribe from any newsletter.
     """
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     subscribed = models.BooleanField(default=True)
     topics = models.ManyToManyField(Topic, through="TopicSusbscription")
+
+    def __str__(self):
+        return self.email
 
 
 class TopicSusbscription(MyBaseModel):
