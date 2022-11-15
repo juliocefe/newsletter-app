@@ -43,7 +43,7 @@ def newsletter_items_create(
         obj = NewsLetterItem(
             newsletter=newsletter,
             created_by=user,
-            recipient=get_object(Recipient, pk=item["recipient"])
+            recipient=get_object(Recipient, pk=item["id"])
         )
         obj.full_clean()
         obj.save()
