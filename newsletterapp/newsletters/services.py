@@ -20,6 +20,7 @@ def newsletter_create(
     user: User,
     items: list[dict]
 ):
+    """Store the news letter in the database."""
     obj = NewsLetter(
         file=file,
         title=title,
@@ -37,7 +38,7 @@ def newsletter_items_create(
     user: User,
     items: list[dict]
 ):
-    """Create items of a newsteller."""
+    """Store recipients of the newsletter in the database."""
     for item in items:
         obj = NewsLetterItem(
             newsletter=newsletter,
