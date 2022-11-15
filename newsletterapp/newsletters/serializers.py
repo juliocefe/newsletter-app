@@ -10,7 +10,8 @@ class NewsLetterCreateSerializer(serializers.Serializer):
     topic = serializers.IntegerField()
     items = inline_serializer(
         fields={
-            "recipient": serializers.IntegerField()
+            "id": serializers.IntegerField(),
+            "email": serializers.EmailField()
         },
         many=True
     )
