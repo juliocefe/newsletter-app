@@ -54,7 +54,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function AddNewsLetter({ open, handleClose }) {
+export default function AddNewsLetter({ open, handleClose, onSuccess }) {
   const {
     submit,
     fileHandleChange,
@@ -71,7 +71,10 @@ export default function AddNewsLetter({ open, handleClose }) {
   } = useNewsLetter();
 
   const handleSubmit = () => {
-    submit().then(handleClose());
+    submit().then(() => {
+      handleClose();
+      onSuccess();
+    });
   };
 
   return (

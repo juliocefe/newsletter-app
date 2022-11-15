@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
 import BasicTable from "./newsTable/news";
+import { useNewsLetters } from "./useNewsLetters";
 
 function DashBoard() {
   return (
@@ -24,6 +25,9 @@ function DashBoard() {
 
 function NewsScreen() {
   const [open, setOpen] = useState(false);
+
+  const { newsLetters, isLoading, fetchNewsLetters } = useNewsLetters();
+
   return (
     <Box
       sx={{
@@ -33,12 +37,10 @@ function NewsScreen() {
       }}
     >
       <DashBoard />
-
       <Box
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          // border: "1px solid green",
           mt: 2,
         }}
       >
@@ -52,12 +54,17 @@ function NewsScreen() {
           flexDirection: "column",
           justifyContent: "flex-end",
           mt: 1,
-          // border: "1px solid red",
         }}
       >
-        <BasicTable />
+        <BasicTable data={newsLetters} />
       </Box>
-      {open && <AddNewsLetter open={open} handleClose={() => setOpen(false)} />}
+      {open && (
+        <AddNewsLetter
+          open={open}
+          handleClose={() => setOpen(false)}
+          onSuccess={() => fetchNewsLetters(new AbortController())}
+        />
+      )}
     </Box>
   );
 }

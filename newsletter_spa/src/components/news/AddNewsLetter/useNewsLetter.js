@@ -1,6 +1,6 @@
 import { useFormInput } from "/src/hooks/InputHook";
 import { getTopics, getRecipients, saveNewsLetter } from "./services";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 export const useNewsLetter = () => {
   const [submiting, setSubmiting] = useState(false);

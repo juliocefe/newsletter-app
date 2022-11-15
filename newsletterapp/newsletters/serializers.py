@@ -15,3 +15,16 @@ class NewsLetterCreateSerializer(serializers.Serializer):
         },
         many=True
     )
+
+
+class NewsLetterListSerializer(serializers.Serializer):
+    id = serializers.CharField()
+    title = serializers.CharField()
+    topic = serializers.StringRelatedField()
+    items = inline_serializer(
+        fields={
+            "id": serializers.IntegerField(),
+            "recipient": serializers.StringRelatedField()
+        },
+        many=True
+    )

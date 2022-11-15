@@ -10,19 +10,8 @@ import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
 import Chip from '@mui/material/Chip';
 
-function createData(name, calories, status) {
-  return { name, calories, status };
-}
 
-const rows = [
-  createData('Check Peres something', "Cars", "pending"),
-  createData('Ice cream sandwich', "Cooking", "success"),
-  createData('Messi something', "Sports", "success"),
-  createData('Cupcake', "Cooking", "pending"),
-  createData('Gingerbread', "Cooking", "pending"),
-];
-
-export default function BasicTable() {
+export default function BasicTable({data}) {
   const status = {
     "pending": "info",
     "success": "success"
@@ -40,15 +29,15 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.title}
               </TableCell>
-              <TableCell align="center">{row.calories}</TableCell>
+              <TableCell align="center">{row.topic}</TableCell>
               <TableCell align="center">
                 <Chip label={row.status} color={status[row.status]} variant="outlined" />
               </TableCell>

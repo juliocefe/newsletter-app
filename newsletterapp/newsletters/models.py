@@ -20,6 +20,9 @@ class Topic(MyBaseModel):
     """
     name = models.CharField(max_length=50, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Recipient(MyBaseModel):
     """Recipient model
@@ -95,7 +98,8 @@ class NewsLetterItem(MyBaseModel):
     """
     newsletter = models.ForeignKey(
         to=NewsLetter,
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        related_name="items"
     )
     recipient = models.ForeignKey(
         to=Recipient,
