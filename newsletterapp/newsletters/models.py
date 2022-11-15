@@ -74,7 +74,7 @@ class NewsLetter(MyBaseModel):
     """
     title = models.CharField(max_length=50)
     file = models.FileField(
-        upload_to="newsletterapp/newsletters/media/newsletters", 
+        upload_to="newsletters/", 
         validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])]
     )
     topic = models.ForeignKey(
