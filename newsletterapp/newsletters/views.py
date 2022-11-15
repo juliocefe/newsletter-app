@@ -1,3 +1,6 @@
+# python
+import json
+# rest framework
 from rest_framework import viewsets, views
 from rest_framework import serializers
 from rest_framework.response import Response
@@ -13,7 +16,11 @@ from newsletterapp.newsletters.selectors import getTopics, getRecipients
 class NewsLetterApi(viewsets.ViewSet):
 
     def create(self, request):
-        serializer = NewsLetterCreateSerializer(data=request.data)
+        request_data: dict = request.data.dict()
+        serializer = NewsLetterCreateSerializer(data={
+            **request_data,
+            "items": json.loads(request_data["items"])
+        })
         serializer.is_valid(raise_exception=True)
         newsletter_create(
             user=request.user,
