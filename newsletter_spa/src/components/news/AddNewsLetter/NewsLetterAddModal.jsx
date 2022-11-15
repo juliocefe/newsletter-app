@@ -12,7 +12,8 @@ import Box from "@mui/material/Box";
 //
 import TextField from "@mui/material/TextField";
 import LimitTags from "./EmailList";
-import ComboBox from "../topics/Topics";
+import ComboBox from "./Topics";
+import {useNewsLetter} from "./useNewsLetter"
 
 const BootstrapDialog = styled(Dialog)(({ theme, sx }) => ({
   "& .MuiDialogContent-root": {
@@ -54,6 +55,14 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function AddNewsLetter({ open, handleClose }) {
+  const {
+    submit,
+    topics,
+    recipients,
+    isLoading,
+    submiting
+  } = useNewsLetter()
+  console.log(topics)
   return (
     <div>
       <BootstrapDialog
@@ -67,7 +76,7 @@ export default function AddNewsLetter({ open, handleClose }) {
         >
           Add News Letter
         </BootstrapDialogTitle>
-        <DialogContent divider>
+        <DialogContent>
           <TextField
             id={"file"}
             label={"File"}
@@ -84,10 +93,10 @@ export default function AddNewsLetter({ open, handleClose }) {
             />
           </Box>
           <Box sx={{ mt: 2 }}>
-            <ComboBox />
+            <ComboBox data={topics}/>
           </Box>
           <Box sx={{ mt: 2 }}>
-            <LimitTags />
+            <LimitTags data={recipients}/>
           </Box>
         </DialogContent>
         <DialogActions sx={{mt: 2}}>
