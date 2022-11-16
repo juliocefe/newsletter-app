@@ -50,7 +50,7 @@ export const useNewsLetter = () => {
     formData.append("file", file)
     formData.append("title", title.value)
     formData.append("topic", selectedTopic.id)
-    formData.append("items", JSON.stringify(recipients))
+    formData.append("items", JSON.stringify(selectedRecipients))
     return saveNewsLetter(formData)
       .then((response) => {
         console.log(response.data);
