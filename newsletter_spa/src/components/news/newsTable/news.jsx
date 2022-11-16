@@ -13,8 +13,8 @@ import Chip from '@mui/material/Chip';
 
 export default function BasicTable({data}) {
   const status = {
-    "pending": "info",
-    "success": "success"
+    "ready": "info",
+    "sent": "success"
   }
   return (
     <TableContainer component={Paper}>
@@ -39,7 +39,7 @@ export default function BasicTable({data}) {
               </TableCell>
               <TableCell align="center">{row.topic}</TableCell>
               <TableCell align="center">
-                <Chip label={row.status} color={status[row.status]} variant="outlined" />
+                <Chip label={row.status.toLowerCase()} color={status[row.status.toLowerCase()]} variant="outlined" />
               </TableCell>
               <TableCell align="right">
               <Button variant="outlined" size={"small"} color="primary" onClick={() => setOpen(true)}>

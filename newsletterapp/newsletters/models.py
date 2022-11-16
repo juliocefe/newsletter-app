@@ -75,6 +75,12 @@ class NewsLetter(MyBaseModel):
         topic: The the newsletter topic.
         created_by: The user that created the newsletter.
     """
+    class Status(models.TextChoices):
+        READY = "READY", "Ready"
+        SENDING = "SENDING", "Sending"
+        SENT = "SENT", "Sent"
+        FAILED = "FAILED", "Failed"
+
     title = models.CharField(max_length=50)
     file = models.FileField(
         upload_to="newsletters/", 
@@ -84,6 +90,7 @@ class NewsLetter(MyBaseModel):
         to=Topic,
         on_delete=models.CASCADE,
     )
+    status = models.CharField(max_length=255, choices=Status.choices, default=Status.READY)
     created_by = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT
