@@ -1,3 +1,5 @@
+# python
+import uuid
 # django
 from django.conf import settings
 from django.db import models
@@ -35,9 +37,11 @@ class Recipient(MyBaseModel):
         chose to unsubscribe from any newsletter.
     """
     email = models.EmailField(unique=True)
+    # TODO maybe remove this field and use unsubscribe_link field is not None
     subscribed = models.BooleanField(default=True)
+    unsubscribe_link = models.UUIDField(default=uuid.uuid4, null=True, editable=False)
     topics = models.ManyToManyField(Topic, through="TopicSusbscription")
-
+    
     def __str__(self):
         return self.email
 
@@ -61,7 +65,9 @@ class TopicSusbscription(MyBaseModel):
         to=Recipient,
         on_delete=models.PROTECT,
     )
+    # TODO maybe remove this field and use unsubscribe_link field is not None
     subscribed = models.BooleanField(default=True)
+    unsubscribe_link = models.UUIDField(default=uuid.uuid4, null=True, editable=False)
 
 
 class NewsLetter(MyBaseModel):
