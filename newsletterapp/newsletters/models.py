@@ -91,6 +91,7 @@ class NewsLetter(MyBaseModel):
         on_delete=models.CASCADE,
     )
     status = models.CharField(max_length=255, choices=Status.choices, default=Status.READY)
+    scheduled_at = models.DateTimeField(null=True, blank=True)
     created_by = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT

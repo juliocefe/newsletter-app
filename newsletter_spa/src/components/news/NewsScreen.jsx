@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import {Box} from "@mui/material";;
 import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
 import BasicTable from "./newsTable/news";
 import { useNewsLetters } from "./useNewsLetters";

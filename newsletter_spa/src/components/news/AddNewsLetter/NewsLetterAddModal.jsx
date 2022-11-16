@@ -8,11 +8,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 //
 import TextField from "@mui/material/TextField";
 import LimitTags from "./EmailList";
 import TopicsSelect from "./Topics";
+import BasicDateTimePicker from "./Calendar";
 import { useNewsLetter } from "./useNewsLetter";
 
 const BootstrapDialog = styled(Dialog)(({ theme, sx }) => ({
@@ -59,10 +60,12 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
     submit,
     fileHandleChange,
     selectRecipients,
+    setSelectedTopic,
+    setScheduledAt,
     file,
     title,
     selectedTopic,
-    setSelectedTopic,
+    scheduledAt,
     selectedRecipients,
     topics,
     recipients,
@@ -76,7 +79,7 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
       onSuccess();
     });
   };
-
+  console.log();
   return (
     <div>
       <BootstrapDialog
@@ -113,6 +116,12 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
               data={topics}
               selectedValue={selectedTopic}
               onChange={setSelectedTopic}
+            />
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <BasicDateTimePicker
+              value={scheduledAt}
+              setValue={setScheduledAt}
             />
           </Box>
           <Box sx={{ mt: 2 }}>

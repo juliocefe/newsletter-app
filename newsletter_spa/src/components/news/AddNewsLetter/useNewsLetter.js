@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 import { useFormInput } from "/src/hooks/InputHook";
 import { getTopics, getRecipients, saveNewsLetter } from "./services";
-import { useEffect, useState } from "react";
+
 
 export const useNewsLetter = () => {
   const [submiting, setSubmiting] = useState(false);
@@ -10,6 +12,7 @@ export const useNewsLetter = () => {
   const [file, setFile] = useState();
   const title = useFormInput("");
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [scheduledAt, setScheduledAt] = useState(dayjs());
   const [selectedRecipients, setSelectedRecipients] = useState([])
 
   const fileHandleChange = (e) => {
@@ -43,13 +46,13 @@ export const useNewsLetter = () => {
       controller.abort()
     }
   }, []);
-
   const submit = async () => {
     setSubmiting(true);
     const formData = new FormData();
     formData.append("file", file)
     formData.append("title", title.value)
     formData.append("topic", selectedTopic.id)
+    formData.append("scheduled_at", scheduledAt.format("YYYY-MM-DDThh:mm"))
     formData.append("items", JSON.stringify(selectedRecipients))
     return saveNewsLetter(formData)
       .then((response) => {
@@ -66,6 +69,8 @@ export const useNewsLetter = () => {
     fileHandleChange,
     selectRecipients,
     setSelectedTopic,
+    setScheduledAt,
+    scheduledAt,
     file,
     title,
     topics,

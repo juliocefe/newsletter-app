@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import Box from "@mui/material/Box";
+import {Box} from "@mui/material";;
 import {Context} from "./Context";
 import Login from "./components/login/login";
 import NewsScreen from "./components/news/NewsScreen";

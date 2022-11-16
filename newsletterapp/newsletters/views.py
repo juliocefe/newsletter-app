@@ -12,8 +12,7 @@ from newsletterapp.newsletters.serializers import NewsLetterListSerializer
 from newsletterapp.newsletters.services import newsletter_create
 # selectors
 from newsletterapp.newsletters.selectors import get_topics, get_recipients, get_news_letters
-# tasks
-from newsletterapp.newsletters.tasks import add
+
 
 class NewsLetterApi(viewsets.ViewSet):
 

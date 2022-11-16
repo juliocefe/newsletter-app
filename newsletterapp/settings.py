@@ -13,7 +13,7 @@ env = environ.Env()
 SECRET_KEY = 'django-insecure-s_+@8tra7ta2efmn))t^#rjg*8@f9de0rn8d1obkg3yv7rr6fu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', "127.0.0.1", "localhost"]
 
@@ -79,6 +79,20 @@ WSGI_APPLICATION = 'newsletterapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_BACKEND = env(
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
+)
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
+EMAIL_TIMEOUT = 5
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-host
+EMAIL_HOST = env("EMAIL_HOST", default="mailhog")
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-port
+EMAIL_PORT = 1025
 
 
 # Password validation

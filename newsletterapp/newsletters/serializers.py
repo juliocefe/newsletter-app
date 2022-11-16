@@ -8,6 +8,7 @@ class NewsLetterCreateSerializer(serializers.Serializer):
     title = serializers.CharField()
     file = serializers.FileField()
     topic = serializers.IntegerField()
+    scheduled_at = serializers.DateTimeField(format="%d/%m/%Y %H:%M:%S")
     items = inline_serializer(
         fields={
             "id": serializers.IntegerField(),
@@ -21,6 +22,7 @@ class NewsLetterListSerializer(serializers.Serializer):
     id = serializers.CharField()
     title = serializers.CharField()
     topic = serializers.StringRelatedField()
+    status = serializers.CharField(source="get_status_display")
     items = inline_serializer(
         fields={
             "id": serializers.IntegerField(),
