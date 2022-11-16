@@ -6,6 +6,7 @@ import uuid
 # django
 from django.db import transaction
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 # models
 from newsletterapp.newsletters.models import NewsLetter, NewsLetterItem
 from newsletterapp.newsletters.models import TopicSusbscription
@@ -89,3 +90,20 @@ def subscribe_recpients_to_topic(recipients: list[NewsLetterItem], topic: Topic)
             recipient=recipient.recipient
         )
 
+
+def unsubscribe_from_topic(uuid: uuid.uuid4):
+    """Unsubscribe the recipient from specific topic."""
+    subscription = get_object_or_404(TopicSusbscription, unsubscribe_link=uuid)
+    subscription.unsubscribe_link = None
+    subscription.save()
+    return f"Unsubscribed successfully from {subscription.topic.name} topic."
+
+
+def unsubscribe_from_all(uuid: uuid.uuid4):
+    """Unsubscribe the recipient from any newsletter."""
+    recipient = get_object_or_404(Recipient, unsubscribe_link=uuid)
+    recipient.unsubscribe_link = None
+    recipient.save()
+    return f"Unsubscribed successfully. :("
+
+    

@@ -1,5 +1,7 @@
 # python
 import json
+# django
+from django.shortcuts import render
 # rest framework
 from rest_framework import viewsets, views
 from rest_framework import serializers
@@ -10,6 +12,8 @@ from newsletterapp.newsletters.serializers import NewsLetterCreateSerializer
 from newsletterapp.newsletters.serializers import NewsLetterListSerializer
 # services
 from newsletterapp.newsletters.services import newsletter_create
+from newsletterapp.newsletters.services import unsubscribe_from_all
+from newsletterapp.newsletters.services import unsubscribe_from_topic
 # selectors
 from newsletterapp.newsletters.selectors import get_topics, get_recipients, get_news_letters
 
@@ -24,6 +28,7 @@ class NewsLetterApi(viewsets.ViewSet):
         })
         serializer.is_valid(raise_exception=True)
         newsletter_create(
+            request,
             user=request.user,
             **serializer.validated_data
         )
@@ -63,3 +68,18 @@ class RecipientsListApi(views.APIView):
 
         data = self.OutputSerializer(queryset, many=True).data
         return Response({"recipients": data},  status=status.HTTP_200_OK)
+
+
+def unsubscribe_from_all_api(request, suscription_id):
+    message = unsubscribe_from_all(suscription_id)
+    return render(request, "unsubscribed_successfully.html", {"message": message})
+
+
+def unsubscribe_from_topic_api(request, suscription_id):
+    message = unsubscribe_from_topic(suscription_id)
+    return render(request, "unsubscribed_successfully.html", {"message": message})
+
+
+# delete this
+def hola(request):
+    return render(request, "email.html", {"name": "eee"})
