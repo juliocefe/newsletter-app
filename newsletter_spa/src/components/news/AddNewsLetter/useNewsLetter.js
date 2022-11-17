@@ -51,7 +51,7 @@ export const useNewsLetter = () => {
     formData.append("file", file);
     formData.append("title", title.value);
     formData.append("topic", selectedTopic.id);
-    formData.append("scheduled_at", scheduledAt.format("YYYY-MM-DDThh:mm"));
+    formData.append("scheduled_at", scheduledAt.format("YYYY-MM-DDTH:mm"));
     formData.append("items", JSON.stringify(selectedRecipients));
     return saveNewsLetter(formData)
       .then((response) => {
