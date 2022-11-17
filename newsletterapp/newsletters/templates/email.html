@@ -1,110 +1,126 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<style>
-    p, a {
-        padding: 0;
-        margin: 0;
-        font-family: "helvetica","arial",sans-serif;
-        font-weight: 400;
-        line-height: 1.65em;
-        letter-spacing: 0.15px;
+  </head>
+  <style>
+    p,
+    a {
+      padding: 0;
+      margin: 0;
+      font-family: "helvetica", "arial", sans-serif;
+      font-weight: 400;
+      line-height: 1.65em;
+      letter-spacing: 0.15px;
     }
     .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    header {
+        width: 500px;
     }
     h1 {
-        background-color: #2d46b9;
-        padding: 40px 20px;
-        color: #1ed760;
-        font-family: "helvetica","arial",sans-serif;
-        width: 500px;
+      background-color: #2d46b9;
+      padding: 40px 20px;
+      color: #1ed760;
+      font-family: "helvetica", "arial", sans-serif;
+      margin: 0;
+      border-radius: 5px 5px 0 0;
     }
     .content {
-        width: 500px;
-        height: 500px;
+      width: 500px;
+      height: 500px;
     }
     img {
-        width: 500px;
-        height: 500px;
+      width: 500px;
+      height: 500px;
     }
     footer {
-        background-color: #f7f7f7;
-        width: 460px;
-        padding: 20px;
+      background-color: #f7f7f7;
+      width: 460px;
+      padding: 20px;
+      border-radius: 0 0 5px 5px;
     }
     footer .download-options {
-        border-top: 1px solid lightgray;
-        border-bottom: 1px solid lightgray;
-        padding: 12px 0;
-        margin-top: 10px;
-        margin-bottom: 20px;
+      border-top: 1px solid lightgray;
+      border-bottom: 1px solid lightgray;
+      padding: 12px 0;
+      margin-top: 10px;
+      margin-bottom: 20px;
     }
-    footer p, footer a   {
-        display: inline;
-        font-size: 12px;
-        color: #88898c;
+    footer p,
+    footer a {
+      display: inline;
+      font-size: 12px;
+      color: #88898c;
     }
     .download-options a {
-        font-weight: 700;
-        text-decoration: none;
+      font-weight: 700;
+      text-decoration: none;
     }
     footer .unsuscribe-content {
-        color: #88898c;
+      color: #88898c;
     }
     footer .unsuscribe-option {
-        font-weight: bold;
-        text-decoration: none;
+      font-weight: bold;
+      text-decoration: none;
     }
     #user-email {
-        color: #15c;
+      color: #15c;
     }
     footer .separator {
-        border: none;
-        padding: 4px 0;
-        margin: 0 7px;
-        width: 1px;
-        border-left: solid 1px #c3c3c3;
-        border-right: solid 1px transparent;
+      border: none;
+      padding: 4px 0;
+      margin: 0 7px;
+      width: 1px;
+      border-left: solid 1px #c3c3c3;
+      border-right: solid 1px transparent;
     }
-    
-</style>
-<body>
+  </style>
+  <body>
     <div class="container">
-        <header>
-            <h1>Conoce las ofertas de dicembre de la plataforma X</h1>
-        </header>
-        <div class="content">
-            <img src="http://{{absolute_url}}{% static 'img/news1.png' %}">
+      <header>
+        <h1>{{ newsletter.title }}</h1>
+      </header>
+      <div class="content">
+        <img src="http://{{absolute_url}}{% get_media_prefix %}{{ image }}" />
+      </div>
+      <footer>
+        <div class="download-options">
+          <p>Download NewsLetterApp for:&nbsp;</p>
+          <a href="#">iPhone</a>
+          <span class="separator">&nbsp;</span>
+          <a href="#">iPad</a>
+          <span class="separator">&nbsp;</span>
+          <a href="#">Android</a>
+          <span class="separator">&nbsp;</span>
+          <a href="#">Otro(s)</a>
         </div>
-        <footer>
-            <div class="download-options">
-                <p>Download NewsLetterApp for:&nbsp;</p>
-                <a href="#">iPhone</a>
-                <span class="separator">&nbsp;</span>
-                <a href="#">iPad</a>
-                <span class="separator">&nbsp;</span>
-                <a href="#">Android</a>
-                <span class="separator">&nbsp;</span>
-                <a href="#">Otro(s)</a>
-            </div>
-            <p class="unsuscribe-content">
-                This message was sent to  
-                <a href="#" id="user-email">{{ email }}</a>. 
-                If you do not desire to receive more emails from NewsLetterApp in the future, you can 
-                <a href="http://{{absolute_url}}{% url 'unsubscribe_topic' unsubscribe_topic_link %}" class="unsuscribe-option">unsubscribe from games newsletters</a> or 
-                <a href="http://{{absolute_url}}{% url 'unsubscribe_all' unsubscribe_all_link %}" class="unsuscribe-option">unsubscribe from every newsletter</a>.</p>
-        </footer>
+        <p class="unsuscribe-content">
+          This message was sent to
+          <a href="#" id="user-email">{{ email }}</a>. If you do not desire to
+          receive more emails from NewsLetterApp in the future, you can
+          <a
+            href="http://{{absolute_url}}{% url 'unsubscribe_topic' unsubscribe_topic_link %}"
+            class="unsuscribe-option"
+            >unsubscribe from {{ newsletter.topic }} newsletters</a
+          >
+          or
+          <a
+            href="http://{{absolute_url}}{% url 'unsubscribe_all' unsubscribe_all_link %}"
+            class="unsuscribe-option"
+            >unsubscribe from every newsletter</a
+          >.
+        </p>
+      </footer>
     </div>
-</body>
+  </body>
 </html>
