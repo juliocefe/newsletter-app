@@ -69,6 +69,9 @@ class TopicSusbscription(MyBaseModel):
     subscribed = models.BooleanField(default=True)
     unsubscribe_link = models.UUIDField(default=uuid.uuid4, null=True, editable=False)
 
+    def __str__(self):
+        return f"{self.recipient.email} - {self.topic.name}"
+
 
 class NewsLetter(MyBaseModel):
     """Newsletter model.

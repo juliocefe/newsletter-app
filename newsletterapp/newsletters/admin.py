@@ -27,3 +27,4 @@ class NewsLetterItemInlineAdmin(admin.TabularInline):
 @admin.register(NewsLetter)
 class NewsLetterAdmin(admin.ModelAdmin):
     inlines = (NewsLetterItemInlineAdmin,)
+    list_display = ("pk", "title", "topic", "created_at")
