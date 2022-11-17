@@ -13,6 +13,7 @@ import Chip from "@mui/material/Chip";
 export default function BasicTable({ data }) {
   const status = {
     ready: "info",
+    sending: "secondary",
     sent: "success",
   };
   return (
