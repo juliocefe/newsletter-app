@@ -13,17 +13,9 @@ env = environ.Env()
 SECRET_KEY = 'django-insecure-s_+@8tra7ta2efmn))t^#rjg*8@f9de0rn8d1obkg3yv7rr6fu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', "127.0.0.1", "localhost"]
-
-# Local time zone. Choices are
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# though not all of them may be available with every OS.
-# In Windows, this must be set to your system time zone.
-TIME_ZONE = "America/Hermosillo"
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
-USE_TZ = True
 
 # Application definition
 DJANGO_APPS = [
@@ -129,12 +121,17 @@ AUTH_USER_MODEL = "users.User"
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+# Local time zone. Choices are
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# though not all of them may be available with every OS.
+# In Windows, this must be set to your system time zone.
+TIME_ZONE = "America/Hermosillo"
+# https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
-
+# https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
+USE_L10N = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
-
 
 # STATIC
 # ------------------------------------------------------------------------------
