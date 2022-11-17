@@ -23,6 +23,8 @@ apiurls = [
     path("api/", include(router.urls)),
     path("api/topics/", views.TopicsListApi.as_view(), name="topics"),
     path("api/recipients/", views.RecipientsListApi.as_view(), name="recipients"),
+    path("api/newsletters_by_day/", views.NewsLettersByDayList.as_view(), name="news_letters_by_day"),
+    path("api/subscriptions_by_topic/", views.SubscriptionsByTopic.as_view(), name="subscriptions_by_topic")
 ]
 
 urlpatterns = apiurls + subscription

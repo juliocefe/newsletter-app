@@ -3,6 +3,7 @@ import json
 # django
 from django.shortcuts import render
 # rest framework
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets, views
 from rest_framework import serializers
 from rest_framework.response import Response
@@ -15,7 +16,11 @@ from newsletterapp.newsletters.services import newsletter_create
 from newsletterapp.newsletters.services import unsubscribe_from_all
 from newsletterapp.newsletters.services import unsubscribe_from_topic
 # selectors
-from newsletterapp.newsletters.selectors import get_topics, get_recipients, get_news_letters
+from newsletterapp.newsletters.selectors import get_news_letters
+from newsletterapp.newsletters.selectors import get_news_letters_by_day
+from newsletterapp.newsletters.selectors import get_recipients
+from newsletterapp.newsletters.selectors import get_topics
+from newsletterapp.newsletters.selectors import get_subscriptions_by_topic
 
 
 class NewsLetterApi(viewsets.ViewSet):
@@ -65,9 +70,22 @@ class RecipientsListApi(views.APIView):
     
     def get(self, request):
         queryset = get_recipients()
-
         data = self.OutputSerializer(queryset, many=True).data
         return Response({"recipients": data},  status=status.HTTP_200_OK)
+
+
+class NewsLettersByDayList(views.APIView):
+
+    def get(self, request):
+        data = get_news_letters_by_day()
+        return Response({"data": data},  status=status.HTTP_200_OK)
+
+
+class SubscriptionsByTopic(views.APIView):
+
+    def get(self, request):
+        data = get_subscriptions_by_topic()
+        return Response({"data": data},  status=status.HTTP_200_OK)
 
 
 def unsubscribe_from_all_api(request, suscription_id):
