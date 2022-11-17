@@ -34,6 +34,9 @@ function NewsScreen() {
         position: "relative",
       }}
     >
+      <Box sx={{position: "absolute", left:1, top: 1}}>
+        <strong>Timezone</strong> app is: America/Hermosillo
+      </Box>
       <Box>
         <LogOutButton logout={logout} />
       </Box>
