@@ -87,7 +87,7 @@ class NewsLetter(MyBaseModel):
         SENT = "SENT", "Sent"
         FAILED = "FAILED", "Failed"
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=80)
     file = models.FileField(
         upload_to="newsletters/", 
         validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])]
