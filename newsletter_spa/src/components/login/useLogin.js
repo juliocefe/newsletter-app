@@ -19,9 +19,7 @@ export const useLogin = () => {
         activateAuth(response.data);
       })
       .catch((error) => {
-        if (error.response.status === 401) {
-          alert(error.response.data.detail);
-        }
+        alert("Todo: add the error handling for errors in general");
         console.log(error);
       });
   };
