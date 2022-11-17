@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { useFormInput } from "/src/hooks/InputHook";
 import { getTopics, getRecipients, saveNewsLetter } from "./services";
 
-
 export const useNewsLetter = () => {
   const [submiting, setSubmiting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,17 +12,17 @@ export const useNewsLetter = () => {
   const title = useFormInput("");
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [scheduledAt, setScheduledAt] = useState(dayjs());
-  const [selectedRecipients, setSelectedRecipients] = useState([])
+  const [selectedRecipients, setSelectedRecipients] = useState([]);
 
   const fileHandleChange = (e) => {
-    setFile(e.target.files[0])
-  }
+    setFile(e.target.files[0]);
+  };
 
   const selectRecipients = (recipients) => {
     setSelectedRecipients(recipients);
   };
 
-  const loadTopicsAndRecipients = controller => {
+  const loadTopicsAndRecipients = (controller) => {
     setIsLoading(true);
     Promise.all([getTopics(controller), getRecipients(controller)])
       .then(([{ data: topicsData }, { data: recipientsData }]) => {
@@ -31,8 +30,8 @@ export const useNewsLetter = () => {
         setRecipients(recipientsData.recipients);
       })
       .catch((error) => {
-        console.log(error)
-        if (!controller.signal.aborted){
+        console.log(error);
+        if (!controller.signal.aborted) {
           alert("Error al cargar los datos", error.data);
         }
       })
@@ -41,19 +40,19 @@ export const useNewsLetter = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    loadTopicsAndRecipients(controller)
+    loadTopicsAndRecipients(controller);
     return () => {
-      controller.abort()
-    }
+      controller.abort();
+    };
   }, []);
   const submit = async () => {
     setSubmiting(true);
     const formData = new FormData();
-    formData.append("file", file)
-    formData.append("title", title.value)
-    formData.append("topic", selectedTopic.id)
-    formData.append("scheduled_at", scheduledAt.format("YYYY-MM-DDThh:mm"))
-    formData.append("items", JSON.stringify(selectedRecipients))
+    formData.append("file", file);
+    formData.append("title", title.value);
+    formData.append("topic", selectedTopic.id);
+    formData.append("scheduled_at", scheduledAt.format("YYYY-MM-DDThh:mm"));
+    formData.append("items", JSON.stringify(selectedRecipients));
     return saveNewsLetter(formData)
       .then((response) => {
         console.log(response.data);

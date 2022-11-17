@@ -32,6 +32,6 @@ export const options = {
   },
 };
 
-export default function NewsLettersByTopicByLast7Days({data}) {
+export default function NewsLettersByTopicByLast7Days({ data }) {
   return <Bar options={options} data={data} />;
 }

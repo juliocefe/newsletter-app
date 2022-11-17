@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import {Context} from "/src/Context";
+import { Context } from "/src/Context";
 import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
 import BasicTable from "./newstable/news";
 import { useNewsLetters } from "./useNewsLetters";
@@ -20,7 +20,7 @@ function DashBoard() {
         display: "flex",
         flexDirection: "row",
         height: 400,
-        marginTop: 3
+        marginTop: 3,
       }}
     >
       <Paper
@@ -48,7 +48,11 @@ function DashBoard() {
 
 function LogOutButton({ logout }) {
   return (
-    <Button variant="outlined" onClick={logout} sx={{position: "absolute", right: 1, top: 1 }}>
+    <Button
+      variant="outlined"
+      onClick={logout}
+      sx={{ position: "absolute", right: 1, top: 1 }}
+    >
       Log out
     </Button>
   );
@@ -65,11 +69,11 @@ function NewsScreen() {
         display: "flex",
         flexDirection: "column",
         p: 3,
-        position: "relative"
+        position: "relative",
       }}
     >
       <Box>
-        <LogOutButton logout={logout}/>
+        <LogOutButton logout={logout} />
       </Box>
       <DashBoard />
       <Box

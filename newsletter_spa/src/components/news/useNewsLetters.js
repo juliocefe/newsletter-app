@@ -25,6 +25,6 @@ export const useNewsLetters = () => {
   return {
     fetchNewsLetters,
     newsLetters,
-    isLoading
+    isLoading,
   };
 };

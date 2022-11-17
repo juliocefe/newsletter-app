@@ -1,8 +1,7 @@
-import { useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
-import {Box} from "@mui/material";;
+import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import {useLogin} from "./useLogin"
+import { useLogin } from "./useLogin";
 
 function Input({ state, name, extraAtrs }) {
   return (
@@ -18,7 +17,7 @@ function Input({ state, name, extraAtrs }) {
 }
 
 function Login() {
-  const { username, password, authenticate } = useLogin()
+  const { username, password, authenticate } = useLogin();
 
   return (
     <Box
@@ -39,11 +38,12 @@ function Login() {
           Sign in
         </Box>
         <Input state={username} name="username" />
-        <Input state={password} name="password" extraAtrs={{type: "password"}} />
-        <Button
-          variant="contained"
-          onClick={authenticate}
-        >
+        <Input
+          state={password}
+          name="password"
+          extraAtrs={{ type: "password" }}
+        />
+        <Button variant="contained" onClick={authenticate}>
           Sign in
         </Button>
       </Box>

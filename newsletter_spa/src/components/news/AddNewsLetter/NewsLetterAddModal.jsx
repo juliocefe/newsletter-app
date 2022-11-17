@@ -107,7 +107,7 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
               label={"Title"}
               variant={"standard"}
               fullWidth={true}
-              inputProps={{maxlength: "50"}}
+              inputProps={{ maxlength: "50" }}
               {...title}
             />
           </Box>
