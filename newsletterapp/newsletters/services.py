@@ -42,8 +42,11 @@ def newsletter_create(
     obj.save()
     recipients_list = newsletter_items_create(obj, user, topic_instance, items)
     subscribe_recpients_to_topic(recipients_list, topic_instance)
-    send_emails(request, obj, recipients_list, topic_instance)
-    # send_emails.apply_async((items,), eta=obj.scheduled_at or timezone.now())
+    host = request.get_host()
+    send_emails.apply_async(
+        (host, obj.pk, [r.pk for r in recipients_list], topic_instance.pk), 
+        eta=obj.scheduled_at or timezone.now()
+    )
     return obj
 
 

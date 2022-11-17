@@ -52,6 +52,7 @@ def get_last_7_day_dates(six_days_ago: date) -> OrderedDict[date:int]:
         index += 1 
     return days
 
+
 def get_news_letters_by_day():
     """Retrieve a number of news letters from last seven days"""
     six_days_ago = timezone.now() - relativedelta(days=6)

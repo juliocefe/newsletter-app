@@ -6,17 +6,29 @@ from celery import shared_task
 from PIL import Image
 # models
 from newsletterapp.newsletters.models import TopicSusbscription
+from newsletterapp.newsletters.models import NewsLetter
+from newsletterapp.newsletters.models import NewsLetterItem
+from newsletterapp.newsletters.models import Topic
+# utils
+from newsletterapp.utils.serializers import get_object
 
 
 SENDER_EMAIL = "username@mailserver.domain"
 PDF_PATH = "newsletterapp/media/newsletters/newsletter.pdf"
 
 
-# @shared_task
-def send_emails(request, newsletter, recipients_list, topic):
-    host = request.get_host()
+@shared_task
+def send_emails(
+    host: str, 
+    newsletter_id: int, 
+    recipientids_list: list[int], 
+    topic_id: int
+):
+    newsletter = get_object(NewsLetter, pk=newsletter_id)
+    topic = get_object(Topic, pk=topic_id)
+    recipientids_list = NewsLetterItem.objects.filter(pk__in=recipientids_list)
     img, pdf_path = get_files_info(newsletter.file)
-    for recipient in recipients_list:
+    for recipient in recipientids_list:
         topic_subscription =  TopicSusbscription.objects.get(
             recipient=recipient.recipient,
             topic=topic
