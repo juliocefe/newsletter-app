@@ -7,7 +7,6 @@ import {
   Legend,
 } from "chart.js";
 import { PolarArea } from "react-chartjs-2";
-import Paper from "@mui/material/Paper";
 import { Box } from "@mui/material";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
