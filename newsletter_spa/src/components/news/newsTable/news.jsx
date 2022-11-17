@@ -49,7 +49,7 @@ export default function BasicTable({ data }) {
                   variant="outlined"
                   size={"small"}
                   color="primary"
-                  onClick={() => setOpen(true)}
+                  disabled={true}
                 >
                   Edit
                 </Button>
