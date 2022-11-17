@@ -79,7 +79,6 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
       onSuccess();
     });
   };
-  console.log();
   return (
     <div>
       <BootstrapDialog
