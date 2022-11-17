@@ -55,7 +55,7 @@ def get_last_7_day_dates(six_days_ago: date) -> OrderedDict[date:int]:
 def get_news_letters_by_day():
     """Retrieve a number of news letters from last seven days"""
     six_days_ago = timezone.now() - relativedelta(days=6)
-    days: OrderedDict[date, int] = get_last_7_day_dates(six_days_ago)
+    days: OrderedDict[date, int] = get_last_7_day_dates(six_days_ago.date())
     queryset = NewsLetter.objects.filter(
             created_at__gte=six_days_ago,
         ).annotate(
