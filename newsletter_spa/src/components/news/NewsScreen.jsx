@@ -1,50 +1,12 @@
 import { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
-import Paper from "@mui/material/Paper";
 import { Context } from "/src/Context";
 import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
 import BasicTable from "./newstable/news";
 import { useNewsLetters } from "./useNewsLetters";
-import Subscriptions from "../dashboard/Subscriptions";
-import NewsLettersByTopicByLast7Days from "../dashboard/newslettersbyday/NewsLettersReport";
-import { useDasboardData } from "../dashboard/newslettersbyday/useNewLettersByDay";
+import DashBoard from "../dashboard/Dashboard";
 
-function DashBoard() {
-  const { nlByTopicByLast7Days, subscriptionsByTopic, isLoading } =
-    useDasboardData();
-
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        height: 400,
-        marginTop: 3,
-      }}
-    >
-      <Paper
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          flex: 3,
-          height: 400,
-          mr: 2,
-        }}
-      >
-        {!isLoading && (
-          <NewsLettersByTopicByLast7Days data={nlByTopicByLast7Days} />
-        )}
-      </Paper>
-      <Paper sx={{ p: 1, flex: 1 }}>
-        {!isLoading && (
-          <Subscriptions data={subscriptionsByTopic} isLoading={isLoading} />
-        )}
-      </Paper>
-    </Box>
-  );
-}
 
 function LogOutButton({ logout }) {
   return (
