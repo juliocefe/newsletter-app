@@ -14,3 +14,5 @@ django-filter==22.1
 Markdown==3.4.1
 # pillow
 Pillow==9.3.0  # https://pillow.readthedocs.io/en/stable/
+# django vite
+django-vite==2.0.2

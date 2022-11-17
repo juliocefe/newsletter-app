@@ -2,6 +2,7 @@
 import json
 # django
 from django.shortcuts import render
+from django.views import View
 # rest framework
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets, views
@@ -96,6 +97,13 @@ def unsubscribe_from_all_api(request, suscription_id):
 def unsubscribe_from_topic_api(request, suscription_id):
     message = unsubscribe_from_topic(suscription_id)
     return render(request, "unsubscribed_successfully.html", {"message": message})
+
+# spa
+class SpaView(View):
+    template_name = 'spa/index.html'
+
+    def get(self, request):
+        return render(request, self.template_name, {})
 
 
 # delete this

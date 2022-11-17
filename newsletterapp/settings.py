@@ -32,6 +32,7 @@ THIRDPARTY_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_celery_beat',
+    'django_vite',
 ]
 
 LOCAL_APPS = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'newsletterapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(APPS_DIR / "templates"), str(APPS_DIR / "static")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,15 +134,27 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 
+
+# --------------------------------- VIJEJS --------------------------------------
+DJANGO_VITE_DEV_MODE = DEBUG
+DJANGO_VITE_ASSETS_PATH = str(APPS_DIR / "static/dist")
+DJANGO_VITE_DEV_SERVER_PORT = 8000
+DJANGO_VITE_MANIFEST_PATH = str(APPS_DIR / "static/dist/manifest.json")
 # STATIC
 # ------------------------------------------------------------------------------
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS,2 JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(APPS_DIR / "staticfiles")
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "static/"
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
 
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # MEDIA
 # ------------------------------------------------------------------------------
@@ -197,5 +210,9 @@ REST_FRAMEWORK = {
 
 # django cors
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
     "http://localhost:5173",
 ]
+# django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
+CORS_URLS_REGEX = r"^/(?:api|spa)/.*$"
