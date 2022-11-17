@@ -74,6 +74,17 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
   } = useNewsLetter();
 
   const handleSubmit = () => {
+    console.log(file)
+    if (
+      title.value === "" 
+      || selectedTopic === null ||
+      topics.length === 0 ||
+      selectedRecipients.length === 0 ||
+      file === null
+      || file === undefined
+    ) {
+      return alert("Every field is required")
+    }
     submit().then(() => {
       handleClose();
       onSuccess();

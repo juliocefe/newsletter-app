@@ -8,7 +8,7 @@ export const useNewsLetter = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [topics, setTopics] = useState([]);
   const [recipients, setRecipients] = useState([]);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const title = useFormInput("");
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [scheduledAt, setScheduledAt] = useState(dayjs());
@@ -59,8 +59,7 @@ export const useNewsLetter = () => {
       })
       .catch((error) => {
         console.log(error);
-        alert(error.response.data.detail);
-        setSubmiting(false)
+        setSubmiting(false);
       });
   };
 
