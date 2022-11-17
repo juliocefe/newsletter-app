@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import {Context} from "/src/Context";
 import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
-import BasicTable from "./newsTable/news";
+import BasicTable from "./newstable/news";
 import { useNewsLetters } from "./useNewsLetters";
 import Subscriptions from "../dashboard/Subscriptions";
 import NewsLettersByTopicByLast7Days from "../dashboard/newslettersbyday/NewsLettersReport";
 import { useDasboardData } from "../dashboard/newslettersbyday/useNewLettersByDay";
 
 function DashBoard() {
-  const { nlByTopicByLast7Days, subscriptionsByTopic, isLoading } = useDasboardData();
+  const { nlByTopicByLast7Days, subscriptionsByTopic, isLoading } =
+    useDasboardData();
 
   return (
     <Box
@@ -18,6 +20,7 @@ function DashBoard() {
         display: "flex",
         flexDirection: "row",
         height: 400,
+        marginTop: 3
       }}
     >
       <Paper
@@ -30,17 +33,30 @@ function DashBoard() {
           mr: 2,
         }}
       >
-        {!isLoading && <NewsLettersByTopicByLast7Days data={nlByTopicByLast7Days}/>}
+        {!isLoading && (
+          <NewsLettersByTopicByLast7Days data={nlByTopicByLast7Days} />
+        )}
       </Paper>
       <Paper sx={{ p: 1, flex: 1 }}>
-        {!isLoading && (<Subscriptions data={subscriptionsByTopic} isLoading={isLoading}/>)}
+        {!isLoading && (
+          <Subscriptions data={subscriptionsByTopic} isLoading={isLoading} />
+        )}
       </Paper>
     </Box>
   );
 }
 
+function LogOutButton({ logout }) {
+  return (
+    <Button variant="outlined" onClick={logout} sx={{position: "absolute", right: 1, top: 1 }}>
+      Log out
+    </Button>
+  );
+}
+
 function NewsScreen() {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const { logout } = useContext(Context);
   const { newsLetters, isLoading, fetchNewsLetters } = useNewsLetters();
 
   return (
@@ -49,9 +65,12 @@ function NewsScreen() {
         display: "flex",
         flexDirection: "column",
         p: 3,
-        background: "#F8F8FF",
+        position: "relative"
       }}
     >
+      <Box>
+        <LogOutButton logout={logout}/>
+      </Box>
       <DashBoard />
       <Box
         sx={{
@@ -60,7 +79,7 @@ function NewsScreen() {
           mt: 2,
         }}
       >
-        <Button variant="contained" onClick={() => setOpen(true)}>
+        <Button variant="contained" onClick={() => setOpenModal(true)}>
           Add News Letter
         </Button>
       </Box>
@@ -74,10 +93,10 @@ function NewsScreen() {
       >
         <BasicTable data={newsLetters} />
       </Box>
-      {open && (
+      {openModal && (
         <AddNewsLetter
-          open={open}
-          handleClose={() => setOpen(false)}
+          open={openModal}
+          handleClose={() => setOpenModal(false)}
           onSuccess={() => fetchNewsLetters(new AbortController())}
         />
       )}

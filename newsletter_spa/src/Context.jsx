@@ -26,7 +26,7 @@ function Provider({children}) {
       setUser(user);
       setIsAuth(true);  // TODO check if this is correct
     },
-    logOut: async () => {
+    logout: async () => {
       window.localStorage.removeItem("token")
       window.localStorage.removeItem("user")
       setUser(null);
