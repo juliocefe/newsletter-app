@@ -42,7 +42,8 @@ function NewsScreen() {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          mt: 2,
+          mb: 1,
+          mt: 3,
         }}
       >
         <Button variant="contained" onClick={() => setOpenModal(true)}>
