@@ -60,6 +60,7 @@ export const useNewsLetter = () => {
       .catch((error) => {
         console.log(error);
         alert(error.response.data.detail);
+        setSubmiting(false)
       });
   };
 
