@@ -79,6 +79,7 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
       onSuccess();
     });
   };
+
   return (
     <div>
       <BootstrapDialog
@@ -133,7 +134,12 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
           </Box>
         </DialogContent>
         <DialogActions sx={{ mt: 2 }}>
-          <Button autoFocus onClick={handleSubmit} variant="contained">
+          <Button
+            autoFocus
+            onClick={handleSubmit}
+            variant="contained"
+            disabled={submiting || isLoading}
+          >
             Submit
           </Button>
         </DialogActions>
