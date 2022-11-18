@@ -38,7 +38,7 @@ And now you can interact with the app.
  * Into the mails at the MIME tab you will be able to download the pdf file.
  * If you scheduled an email for the future, you can go and check the task status at:
    [celery flower](http://127.0.0.1:5555//) you will need the credentials located at ./envs./local/.django CELERY_FLOWER_USER and CELERY_FLOWER_PASSWORD
- * By the way dashboard does not refresh after send the email, you need to reload to refresh the data :s
+ * By the way the dashboard section does not refresh after sent an email, you need to reload to refresh the data :s
  
 If you desire, you can go and log in to the django admin and change the data from the admin cruds:
 [django admin](http://127.0.0.1:8000/admin)
