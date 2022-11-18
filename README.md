@@ -43,10 +43,12 @@ If you desire, you can go and log in to the django admin and change the data fro
 [django admin](http://127.0.0.1:8000/admin)
 
 Some project screenshots:
+[login](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/login.png?raw=true)
 [home 1](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/home1.png?raw=true)
 [home 2](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/home2.png?raw=true)
 [formulary](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/newsletter-formulary.png?raw=true)
 [email content](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/email.png?raw=true)
+[flower](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/flower.png?raw=true)
 
 
 Thanks for follow the steps, sorry about the vite dev server :S
