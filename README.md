@@ -13,7 +13,7 @@ docker compose up -d
 
 Initial data is needed, because we need recipients and topics to use the app. Also a user to log in
 ```bash
-docker compose run --rm django python manage.py loaddata mydata.json.gz
+docker compose run --rm django python manage.py loaddata initial.json.gz
 ```
 
 Please do not punish me too hard for this, we will need the vite dev server to use the app:
@@ -21,6 +21,7 @@ Please do not punish me too hard for this, we will need the vite dev server to u
 Start vite server with:
 ```bash
 cd newsletter_spa
+yarn
 yarn dev
 ```
 In your browser go to [react app](http://localhost:5173/)
@@ -36,8 +37,8 @@ And now you can interact with the app.
  * If you click some email you should see an html content with an image(if you attached one)
  * Into the mails at the MIME tab you will be able to download the pdf file.
  * If you scheduled an email for the future, you can go and check the task status at:
-   [celery flower](http://127.0.0.1:5555//) you will need the credentials located at ./envs.django CELERY_FLOWER_USER and CELERY_FLOWER_PASSWORD
- * By the way dashboard does not refresh after send the email, you need to reload to refresh the data :s
+   [celery flower](http://127.0.0.1:5555//) you will need the credentials located at ./envs./local/.django CELERY_FLOWER_USER and CELERY_FLOWER_PASSWORD
+ * By the way the dashboard section does not refresh after sent an email, you need to reload to refresh the data :s
  
 If you desire, you can go and log in to the django admin and change the data from the admin cruds:
 [django admin](http://127.0.0.1:8000/admin)
@@ -51,7 +52,7 @@ Some project screenshots:
 [flower](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/flower.png?raw=true)
 
 
-Thanks for follow the steps, sorry about the vite dev server :S
+Thanks for following the steps, sorry about the vite dev server :S
 
 
     
