@@ -13,7 +13,7 @@ docker compose up -d
 
 Initial data is needed, because we need recipients and topics to use the app. Also a user to log in
 ```bash
-docker compose run --rm django python manage.py loaddata mydata.json.gz
+docker compose run --rm django python manage.py loaddata initial.json.gz
 ```
 
 Please do not punish me too hard for this, we will need the vite dev server to use the app:
