@@ -32,12 +32,12 @@ In password type: 123
 And now you can interact with the app.
 
  * We can only send emails
- * After a newsletter submition you can go to [mailhog](http://127.0.0.1:8025), and we are going to see our emails there.
- * If you click some email you should see an html content with a photo(if you submitted one)
- * Into the mails at the MIME tab you can download the pdf file.
- * If you schedule an email for the future, you can go and check the task statis at:
+ * After a newsletter submition you can go to [mailhog](http://127.0.0.1:8025), and we are going to find our emails there.
+ * If you click some email you should see an html content with an image(if you attached one)
+ * Into the mails at the MIME tab you will be able to download the pdf file.
+ * If you scheduled an email for the future, you can go and check the task status at:
    [celery flower](http://127.0.0.1:5555//) you will need the credentials located at ./envs.django CELERY_FLOWER_USER and CELERY_FLOWER_PASSWORD
- * The dashboard does not refresh after send the email, you need to reload to refresh the data
+ * By the way dashboard does not refresh after send the email, you need to reload to refresh the data :s
  
 If you desire, you can go and log in to the django admin and change the data from the admin cruds:
 [django admin](http://127.0.0.1:8000/admin)
