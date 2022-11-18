@@ -32,7 +32,7 @@ In password type: 123
 
 And now you can interact with the app.
 
- * We can only send emails
+ * The main and only action is send newsletters by email
  * After a newsletter submition you can go to [mailhog](http://127.0.0.1:8025), and we are going to find our emails there.
  * If you click some email you should see an html content wich contains the image(if you attached one). The content footer contains two links **one to unsubscribe from the topic** and other to **unsubscribe from all newsletter**.
  * Into the mails at the MIME tab you will be able to download the pdf file.
