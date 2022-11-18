@@ -52,7 +52,7 @@ Some project screenshots:
 [flower](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/flower.png?raw=true)
 
 
-Thanks for follow the steps, sorry about the vite dev server :S
+Thanks for following the steps, sorry about the vite dev server :S
 
 
     
