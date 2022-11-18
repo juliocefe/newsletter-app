@@ -18,8 +18,8 @@ services:
       - /app/.env # do not link this directory
       - /app/newsletter_spa  # do not link this directory
     env_file:
-      - ./.envs/.django
-      - ./.envs/.postgres
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
     command: /start
@@ -30,7 +30,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data:Z
     env_file:
-      - ./.envs/.postgres
+      - ./.envs/.local/.postgres
 
   mailhog:
     image: mailhog/mailhog:v1.0.0

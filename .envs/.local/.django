@@ -1,0 +1,16 @@
+# General
+# ------------------------------------------------------------------------------
+DJANGO_SETTINGS_MODULE=newsletterapp.settings
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=secret_flower_user
+CELERY_FLOWER_PASSWORD=secret_flower_password
+
