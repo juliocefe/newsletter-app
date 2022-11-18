@@ -44,7 +44,7 @@ def send_emails(
         with mail.get_connection() as connection:
             html_content = render_to_string("email.html", context)
             email = mail.EmailMessage(
-                "subject here", 
+                topic.name, 
                 html_content, 
                 SENDER_EMAIL,
                 [recipient.recipient.email],
