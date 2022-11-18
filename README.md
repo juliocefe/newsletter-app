@@ -21,6 +21,7 @@ Please do not punish me too hard for this, we will need the vite dev server to u
 Start vite server with:
 ```bash
 cd newsletter_spa
+yarn
 yarn dev
 ```
 In your browser go to [react app](http://localhost:5173/)
