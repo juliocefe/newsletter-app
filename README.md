@@ -16,7 +16,13 @@ Initial data is needed, because we need recipients and topics to use the app. Al
 docker compose run --rm django python manage.py loaddata mydata.json.gz
 ```
 
-Please do not punish me to hard for this, we will ned to use the vite dev server to use the app :(:
+Please do not punish me too hard for this, we will need the vite dev server to use the app:
+
+Start vite server with:
+```bash
+cd newsletter_spa
+yarn dev
+```
 In your browser go to [react app](http://localhost:5173/)
 
 In username type: user
