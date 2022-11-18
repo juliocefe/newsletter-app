@@ -6,7 +6,7 @@
 Start the project
 
 ```bash
-docker compose -f up -d
+docker compose up -d
 ```
 
 ## Usage
