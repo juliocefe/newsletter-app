@@ -42,9 +42,12 @@ And now you can interact with the app.
 If you desire, you can go and log in to the django admin and change the data from the admin cruds:
 [django admin](http://127.0.0.1:8000/admin)
 
-![alt text](https://github.com/juliocefe/sc_challenge/blob/main/accounts.png?raw=true)
+Some project screenshots:
+[home 1](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/home1.png?raw=true)
+[home 2](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/home2.png?raw=true)
+[formulary](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/newsletter-formulary.png?raw=true)
+[email content](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/email.png?raw=true)
 
-![alt text](https://github.com/juliocefe/sc_challenge/blob/main/transactions.png?raw=true)
 
 Thanks for follow the steps, sorry about the vite dev server :S
 
