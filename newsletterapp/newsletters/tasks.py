@@ -24,8 +24,11 @@ def send_emails(
     recipientids_list: list[int], 
     topic_id: int
 ):
-    newsletter = get_object(NewsLetter, pk=newsletter_id)
-    topic = get_object(Topic, pk=topic_id)
+    newsletter: NewsLetter = get_object(NewsLetter, pk=newsletter_id)
+    # update status to sending
+    newsletter.status = NewsLetter.Status.SENDING
+    newsletter.save()
+    topic: Topic = get_object(Topic, pk=topic_id)
     recipientids_list = NewsLetterItem.objects.filter(pk__in=recipientids_list)
     img, pdf_path = get_files_info(newsletter.file)
     for recipient in recipientids_list:
@@ -53,6 +56,9 @@ def send_emails(
             email.content_subtype = "html"
             email.attach_file(pdf_path)
             email.send()
+        # update newsletter status to sent
+        newsletter.status = NewsLetter.Status.SENT
+        newsletter.save()
 
 
 def get_files_info(initial_file):
