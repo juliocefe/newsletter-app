@@ -13,6 +13,7 @@ export const useNewsLetter = () => {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [scheduledAt, setScheduledAt] = useState(dayjs());
   const [selectedRecipients, setSelectedRecipients] = useState([]);
+  const [errors, setErrors] = useState({noneFieldErrors: null, fields: {}})
 
   const fileHandleChange = (e) => {
     setFile(e.target.files[0]);
@@ -30,9 +31,8 @@ export const useNewsLetter = () => {
         setRecipients(recipientsData.recipients);
       })
       .catch((error) => {
-        console.log(error);
         if (!controller.signal.aborted) {
-          alert("Error al cargar los datos", error.data);
+          setErrors(error.response.data);
         }
       })
       .finally(() => setIsLoading(false));
@@ -45,12 +45,17 @@ export const useNewsLetter = () => {
       controller.abort();
     };
   }, []);
+  
   const submit = async () => {
     setSubmiting(true);
     const formData = new FormData();
-    formData.append("file", file);
+    if (file) {
+      formData.append("file", file);
+    }
     formData.append("title", title.value);
-    formData.append("topic", selectedTopic.id);
+    if (selectedTopic?.id){
+      formData.append("topic", selectedTopic.id);
+    }
     formData.append("scheduled_at", scheduledAt.format("YYYY-MM-DDTH:mm"));
     formData.append("items", JSON.stringify(selectedRecipients));
     return saveNewsLetter(formData)
@@ -59,7 +64,9 @@ export const useNewsLetter = () => {
       })
       .catch((error) => {
         console.log(error);
+        setErrors(error.response.data);
         setSubmiting(false);
+        return Promise.reject()
       });
   };
 
@@ -78,5 +85,6 @@ export const useNewsLetter = () => {
     recipients,
     isLoading,
     submiting,
+    errors,
   };
 };
