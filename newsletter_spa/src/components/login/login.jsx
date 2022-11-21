@@ -4,13 +4,39 @@ import TextField from "@mui/material/TextField";
 import { useLogin } from "./useLogin";
 import Logo from "/src/assets/logo.png";
 
+function NonFieldErrors({error}){
+  const style = {
+    border: "1px red solid",
+    borderRadius: 1,
+    padding: 3,
+    color: "red",
+    fontSize: 18,
+    fontWeight: "bold"
+  }
+  return  (
+    <Box component={"p"} sx={style}>
+     {error}
+    </Box>
+  )
+}
+
 
 function Login() {
-  const { username, password, authenticate } = useLogin();
+  const { username, password, authenticate, error } = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault()
     authenticate()
+  }
+
+  const showErrors = (errorList) => {
+    if (errorList){
+      return {
+        error: true,
+        helperText: errorList.join('. ')
+      }
+    }
+    return null
   }
 
   return (
@@ -42,7 +68,9 @@ function Login() {
             Sign in
           </Box>
         </Box>
+        {error?.noneFieldErrors && <NonFieldErrors error={error.noneFieldErrors}/>}
         <TextField
+          {...showErrors(error.fields.username)}
           {...username}
           name={"username"}
           label={"username"}
@@ -53,6 +81,7 @@ function Login() {
           sx={{ mb: 2 }}
         />
         <TextField
+          {...showErrors(error.fields.password)}
           {...password}
           name={"password"}
           label={"password"}
