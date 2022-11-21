@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import { Context } from "/src/Context";
 import AddNewsLetter from "./addnewsletter/NewsLetterAddModal";
-import BasicTable from "./newstable/news";
+import News from "./newstable/News";
 import { useNewsLetters } from "./useNewsLetters";
 import DashBoard from "../dashboard/Dashboard";
 
@@ -61,7 +61,7 @@ function NewsScreen() {
           mt: 1,
         }}
       >
-        <BasicTable data={newsLetters} />
+        <News data={newsLetters} />
       </Box>
       {openModal && (
         <AddNewsLetter
