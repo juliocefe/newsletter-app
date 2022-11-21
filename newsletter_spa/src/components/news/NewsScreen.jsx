@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import { Context } from "/src/Context";
-import AddNewsLetter from "./AddNewsLetter/NewsLetterAddModal";
+import AddNewsLetter from "./addnewsletter/NewsLetterAddModal";
 import BasicTable from "./newstable/news";
 import { useNewsLetters } from "./useNewsLetters";
 import DashBoard from "../dashboard/Dashboard";
