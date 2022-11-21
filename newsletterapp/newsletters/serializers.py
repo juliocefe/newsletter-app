@@ -14,6 +14,7 @@ class NewsLetterCreateSerializer(serializers.Serializer):
             "id": serializers.IntegerField(),
             "email": serializers.EmailField()
         },
+        min_length=1,
         many=True
     )
 
