@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useLogin } from "./useLogin";
 import Logo from "/src/assets/logo.png";
+import { showErrors } from "/src/components/helpers/showerrors";
 
 function NonFieldErrors({error}){
   const style = {
@@ -27,16 +28,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     authenticate()
-  }
-
-  const showErrors = (errorList) => {
-    if (errorList){
-      return {
-        error: true,
-        helperText: errorList.join('. ')
-      }
-    }
-    return null
   }
 
   return (
