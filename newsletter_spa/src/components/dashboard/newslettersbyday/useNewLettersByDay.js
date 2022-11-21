@@ -67,7 +67,11 @@ export const useDasboardData = () => {
         });
         setIsLoading(false);
       }
-    );
+    ).catch(error => {
+      if (!controller.signal.aborted) {
+        console.log(error)
+      }
+    });
   };
 
   return {

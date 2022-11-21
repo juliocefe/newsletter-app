@@ -1,6 +1,6 @@
 import axios from "/src/libs/http";
 
-export const saveNewsLetter = async (formData) => {
+export const saveNewsLetter = (formData) => {
   const url = "/newsletters/";
   return axios.post(url, formData);
 };

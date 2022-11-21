@@ -18,6 +18,10 @@ export const useNewsLetters = () => {
     return getNewsLetters(controller)
       .then(({ data }) => {
         setNewsLetters(data.newsletters);
+      }).catch(response => {
+        if (!controller.signal.aborted) {
+          console.log(response)
+        }
       })
       .finally(() => setIsLoading(false));
   };
