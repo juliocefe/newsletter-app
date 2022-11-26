@@ -38,6 +38,8 @@ def newsletter_create(
         scheduled_at=scheduled_at,
         topic=topic_instance
     )
+    if scheduled_at <= timezone.now():
+        obj.status = NewsLetter.Status.SENDING
     obj.full_clean()
     obj.save()
     recipients_list = newsletter_items_create(obj, user, topic_instance, items)

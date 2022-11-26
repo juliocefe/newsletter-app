@@ -9,12 +9,12 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
-//
 import TextField from "@mui/material/TextField";
-import LimitTags from "./EmailList";
+import Recipients from "./EmailList";
 import TopicsSelect from "./Topics";
-import BasicDateTimePicker from "./Calendar";
+import Schedule from "./Calendar";
 import { useNewsLetter } from "./useNewsLetter";
+import { showErrors } from "/src/components/helpers/showerrors";
 
 const BootstrapDialog = styled(Dialog)(({ theme, sx }) => ({
   "& .MuiDialogContent-root": {
@@ -71,24 +71,15 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
     recipients,
     isLoading,
     submiting,
+    errors
   } = useNewsLetter();
 
-  const handleSubmit = () => {
-    console.log(file)
-    if (
-      title.value === "" 
-      || selectedTopic === null ||
-      topics.length === 0 ||
-      selectedRecipients.length === 0 ||
-      file === null
-      || file === undefined
-    ) {
-      return alert("Every field is required")
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
     submit().then(() => {
       handleClose();
       onSuccess();
-    });
+    }).catch(e => null);
   };
 
   return (
@@ -105,55 +96,62 @@ export default function AddNewsLetter({ open, handleClose, onSuccess }) {
           Add News Letter
         </BootstrapDialogTitle>
         <DialogContent>
-          <TextField
-            id={"file"}
-            label={"File"}
-            variant={"standard"}
-            fullWidth={true}
-            type={"file"}
-            onChange={fileHandleChange}
-          />
-          <Box sx={{ mt: 2 }}>
+          <Box component={"form"}>
             <TextField
-              id={"title"}
-              label={"Title"}
+              id={"file"}
+              label={"File"}
               variant={"standard"}
               fullWidth={true}
-              inputProps={{ maxlength: "80" }}
-              {...title}
+              type={"file"}
+              onChange={fileHandleChange}
+              {...showErrors(errors.file)}
             />
+            <Box sx={{ mt: 2 }}>
+              <TextField
+                id={"title"}
+                label={"Title"}
+                variant={"standard"}
+                fullWidth={true}
+                inputProps={{ maxLength: "80" }}
+                {...title}
+                {...showErrors(errors.title)}
+              />
+            </Box>
+            <Box sx={{ mt: 2 }}>
+              <TopicsSelect
+                data={topics}
+                selectedValue={selectedTopic}
+                onChange={setSelectedTopic}
+                errors={showErrors(errors.topic)}
+              />
+            </Box>
+            <Box sx={{ mt: 2 }}>
+              <Schedule
+                value={scheduledAt}
+                setValue={setScheduledAt}
+                errors={showErrors(errors.scheduled_at)}
+                />
+            </Box>
+            <Box sx={{ mt: 2 }}>
+              <Recipients
+                options={recipients}
+                selectedOptions={selectedRecipients}
+                selectOptions={selectRecipients}
+                errors={showErrors(errors.items)}
+              />
+            </Box>
           </Box>
-          <Box sx={{ mt: 2 }}>
-            <TopicsSelect
-              data={topics}
-              selectedValue={selectedTopic}
-              onChange={setSelectedTopic}
-            />
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <BasicDateTimePicker
-              value={scheduledAt}
-              setValue={setScheduledAt}
-            />
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <LimitTags
-              options={recipients}
-              selectedOptions={selectedRecipients}
-              selectOptions={selectRecipients}
-            />
-          </Box>
+          <DialogActions sx={{ mt: 2 }}>
+            <Button
+              autoFocus
+              onClick={handleSubmit}
+              variant="contained"
+              disabled={submiting || isLoading}
+            >
+              Submit
+            </Button>
+          </DialogActions>
         </DialogContent>
-        <DialogActions sx={{ mt: 2 }}>
-          <Button
-            autoFocus
-            onClick={handleSubmit}
-            variant="contained"
-            disabled={submiting || isLoading}
-          >
-            Submit
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
     </div>
   );

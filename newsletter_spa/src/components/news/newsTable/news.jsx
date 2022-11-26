@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 
-export default function BasicTable({ data }) {
+export default function News({ data }) {
   const status = {
     ready: "info",
     sending: "secondary",
