@@ -16,8 +16,6 @@ Initial data is needed, because we need recipients and topics to use the app. Al
 docker compose run --rm django python manage.py loaddata initial.json.gz
 ```
 
-Please do not punish me too hard for this, we will need the vite dev server to use the app:
-
 Start vite server with:
 ```bash
 cd newsletter_spa
@@ -52,7 +50,7 @@ Some project screenshots:
 [flower](https://github.com/juliocefe/sc_fullstack_challenge/blob/main/flower.png?raw=true)
 
 
-Thanks for following the steps, sorry about the vite dev server :S
+Thanks for reviewing the project, any feedback is much appreciated 🙏🏻
 
 
     
