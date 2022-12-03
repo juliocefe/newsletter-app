@@ -1,4 +1,4 @@
-# SC Fullstack Challenge
+# NewsLetterApp
 
 
 ## Installation
