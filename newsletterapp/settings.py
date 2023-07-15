@@ -135,11 +135,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# --------------------------------- VIJEJS --------------------------------------
-DJANGO_VITE_DEV_MODE = DEBUG
-DJANGO_VITE_ASSETS_PATH = str(APPS_DIR / "static/dist")
-DJANGO_VITE_DEV_SERVER_PORT = 8000
-DJANGO_VITE_MANIFEST_PATH = str(APPS_DIR / "static/dist/manifest.json")
+
 # STATIC
 # ------------------------------------------------------------------------------
 # Static files (CSS,2 JavaScript, Images)
@@ -148,13 +144,21 @@ DJANGO_VITE_MANIFEST_PATH = str(APPS_DIR / "static/dist/manifest.json")
 STATIC_ROOT = str(APPS_DIR / "staticfiles")
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "static/"
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
+
+# --------------------------------- VIJEJS --------------------------------------
+DJANGO_VITE_DEV_MODE = False
+DJANGO_VITE_ASSETS_PATH = str(APPS_DIR / "static/dist/")
+DJANGO_VITE_DEV_SERVER_PORT = 8000
+DJANGO_VITE_MANIFEST_PATH = str(APPS_DIR / "static/dist/manifest.json")
+
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
+
 
 # MEDIA
 # ------------------------------------------------------------------------------

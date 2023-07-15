@@ -87,6 +87,8 @@ def get_news_letters_by_day():
         "datasets": datasets
     }
 
+
+
 def get_subscriptions_by_topic():
     """Retrive subscriptions number by topic"""
     return TopicSusbscription.objects.values(
